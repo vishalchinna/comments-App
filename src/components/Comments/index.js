@@ -22,10 +22,7 @@ class Comments extends Component {
     this.setState({name: 'vishal'})
   }
 
-  deleteIcon = id => {
-    const {commentsList} = this.setState
-    this.setState({commentsList: commentsList.filter(each => each.id !== id)})
-  }
+  deleteIcon = id => {}
 
   renderCommentList = () => {
     const {commentsList} = this.setState

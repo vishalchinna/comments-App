@@ -1,6 +1,4 @@
 import {Component} from 'react'
-import {formatDistanceToNow} from 'date-fns'
-
 import './index.css'
 import {v4 as uuidv4} from 'uuid'
 import CommentItem from '../CommentItem'
@@ -18,14 +16,24 @@ const initialContainerBackgroundClassNames = [
 class Comments extends Component {
   state = {commentsList: [], name: '', comment: ''}
 
-  onChangeLike = () => {
-    this.setState({name: 'vishal'})
+  onChangeLike = id => {
+    this.setState(prevState => ({
+      commentsList: prevState.commentsList.map(each => {
+        if (each.id === id) {
+          return {...each, Like: !each.Like}
+        }
+        return each
+      }),
+    }))
   }
 
-  deleteIcon = id => {}
+  deleteIcon = id => {
+    const {commentsList} = this.state
+    this.setState({commentsList: commentsList.filter(each => each.id !== id)})
+  }
 
   renderCommentList = () => {
-    const {commentsList} = this.setState
+    const {commentsList} = this.state
 
     return commentsList.map(each => (
       <CommentItem
@@ -62,9 +70,7 @@ class Comments extends Component {
   }
 
   render() {
-    const {commentsList, name, comment, date} = this.state
-    console.log(formatDistanceToNow(new Date()))
-    console.log(date)
+    const {commentsList, name, comment} = this.state
 
     return (
       <div className="box-container">
@@ -106,7 +112,7 @@ class Comments extends Component {
           </button>
           <span className="para">Comments</span>
         </div>
-        <ul>{this.renderCommentList}</ul>
+        <ul>{this.renderCommentList()}</ul>
       </div>
     )
   }

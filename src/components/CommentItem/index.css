@@ -73,6 +73,14 @@
   background-color: transparent;
   border-width: 0px;
 }
+.liked {
+  font-size: 12px;
+  padding-left: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  border-width: 0px;
+  color: #0b69ff;
+}
 .like-box {
   display: flex;
   align-items: center;

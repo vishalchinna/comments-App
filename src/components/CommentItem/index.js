@@ -1,8 +1,9 @@
 import './index.css'
+import {formatDistanceToNow} from 'date-fns'
 
 const CommentItem = prop => {
   const {commentText, deleteIcon, onChangeLike} = prop
-  const {name, comment, id, Like, date} = commentText
+  const {name, comment, id, Like} = commentText
 
   const deleteComment = () => {
     deleteIcon(id)
@@ -13,6 +14,8 @@ const CommentItem = prop => {
     console.log('like')
   }
 
+  const LikeClass = Like ? 'liked' : 'like'
+
   console.log(comment)
 
   return (
@@ -22,7 +25,7 @@ const CommentItem = prop => {
         <div className="comment">
           <div className="TitleName">
             <li className="title">{name}</li>
-            <li className="time">{date}</li>
+            <li className="time">{formatDistanceToNow(new Date())}</li>
           </div>
           <p className="cmt">{comment}</p>
         </div>
@@ -41,7 +44,7 @@ const CommentItem = prop => {
             />
           )}
 
-          <button type="button" onClick={changeLike} className="like">
+          <button type="button" onClick={changeLike} className={LikeClass}>
             Like
           </button>
         </div>
